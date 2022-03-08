@@ -22,14 +22,23 @@
  * Define Global Variables
  * 
 */
-
+const sections=Array.from(document.querySelectorAll("section"));
+const menu=document.getElementById("navbar__list");
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
+function createMenuItem(){
+    for (const section of sections) {
+        sectionName=section.getAttribute("data-nav");
+        sectionLink=section.getAttribute("id");
+        listContent=document.createElement("li");
+        listContent.innerHTML=`<a class="menu__link" href="#${sectionLink}">${sectionName}</a>`;
+        menu.appendChild(listContent);
+    }
+}
 
 
 /**
@@ -39,7 +48,7 @@
 */
 
 // build the nav
-
+createMenuItem();
 
 // Add class 'active' to section when near top of viewport
 
