@@ -22,8 +22,8 @@
  * Define Global Variables
  * 
 */
-const sections=Array.from(document.querySelectorAll("section"));
-const menu=document.getElementById("navbar__list");
+    const sections=Array.from(document.querySelectorAll("section"));
+    const menu=document.getElementById("navbar__list");
 
 /**
  * End Global Variables
@@ -51,7 +51,22 @@ function createMenuItem(){
 createMenuItem();
 
 // Add class 'active' to section when near top of viewport
-
+    let observer= new IntersectionObserver((entries) =>{
+        entries.forEach(entry =>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("your-active-class");
+            }else{
+                entry.target.classList.remove("your-active-class");
+            }
+        })  
+    },{
+        threshold:0.5,
+        rootMargin:"-150px"
+    });
+// observe all sections 
+    sections.forEach(entry =>{
+        observer.observe(entry);
+    })
 
 // Scroll to anchor ID using scrollTO event
 
