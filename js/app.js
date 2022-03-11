@@ -22,7 +22,9 @@
  * Define Global Variables
  * 
 */
+    // select all sections
     const sections=Array.from(document.querySelectorAll("section"));
+    // select navbar list
     const menu=document.getElementById("navbar__list");
 
 /**
@@ -33,9 +35,9 @@
 function createMenuItem(){
     for (const section of sections) {
         sectionName=section.getAttribute("data-nav");
-        sectionLink=section.getAttribute("id");
+        sectionId=section.getAttribute("id");
         listContent=document.createElement("li");
-        listContent.innerHTML=`<a class="menu__link" href="#${sectionLink}">${sectionName}</a>`;
+        listContent.innerHTML=`<a class="menu__link" data-nav="${sectionId}">${sectionName}</a>`;
         menu.appendChild(listContent);
     }
 }
@@ -51,22 +53,23 @@ function createMenuItem(){
 createMenuItem();
 
 // Add class 'active' to section when near top of viewport
-    let observer= new IntersectionObserver((entries) =>{
-        entries.forEach(entry =>{
-            if(entry.isIntersecting){
-                entry.target.classList.add("your-active-class");
-            }else{
-                entry.target.classList.remove("your-active-class");
-            }
-        })  
-    },{
-        threshold:0.5,
-        rootMargin:"-150px"
-    });
-// observe all sections 
-    sections.forEach(entry =>{
-        observer.observe(entry);
-    })
+
+function makeActive() {
+    for (const section of sections) {
+    let activeLink = menu.querySelector(`[data-nav=${section.id}]`);
+      const box = section.getBoundingClientRect();
+       
+      if (box.top <= 150 && box.bottom >= 150) {
+       section.classList.add("your-active-class");
+       activeLink.classList.add("active__link");
+      } else {
+        section.classList.remove("your-active-class");
+        activeLink.classList.remove("active__link");
+      }
+    }
+  }
+
+
 
 // Scroll to anchor ID using scrollTO event
 
@@ -80,7 +83,13 @@ createMenuItem();
 // Build menu 
 
 // Scroll to section on link click
+menu.addEventListener("click", (event) => {
+    document.getElementById(`${event.target.dataset.nav}`).scrollIntoView();
+   
+});
 
 // Set sections as active
-
+document.addEventListener("scroll", function() {
+    makeActive();
+  });
 

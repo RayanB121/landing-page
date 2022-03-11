@@ -78,6 +78,10 @@ section {
     display: inline-block;
 }
 
+.active__link{
+    background: rgb(40, 23, 189);
+}
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
@@ -86,11 +90,15 @@ section {
     color: #000;
 }
 
-.navbar__menu .menu__link:hover {
+.navbar__menu .menu__link:hover  {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
 }
+
+
+
+
 
 /* Header Styles */
 .page__header {
@@ -199,7 +207,7 @@ section:nth-of-type(3n + 1) .landing__container::after {
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.your-active-class {
     background: rgb(0, 0, 0);
-    /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);*/
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 section.your-active-class .landing__container::before {
